@@ -6,17 +6,17 @@ import { Message } from '../../messages/schemas/messages.schemas';
 
 export type SupportRequestDocument = Hotel & Document;
 
-@Schema({timestamps: true})
+@Schema({ timestamps: true })
 export class SupportRequest {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user: User;
   @Prop()
   description: string;
-  @Prop({type:[Message]})
+  @Prop({ type: [Message] })
   messages: Message[];
   @Prop()
-  isActive: true
+  isActive: true;
 }
 
-export const SupportRequestSchema = SchemaFactory.createForClass(SupportRequest);
-
+export const SupportRequestSchema =
+  SchemaFactory.createForClass(SupportRequest);

@@ -1,5 +1,5 @@
 {
-  "name": ".",
+  "name": "booking",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -21,6 +21,11 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
     "@nrwl/cypress": "15.4.4",
@@ -39,14 +44,10 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "@types/react-router-dom": "5.3.3",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
     "@vitejs/plugin-react": "^3.0.0",
     "@vitest/coverage-c8": "~0.25.8",
     "@vitest/ui": "^0.25.8",
     "cypress": "^11.0.0",
-    "eslint": "~8.15.0",
-    "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",

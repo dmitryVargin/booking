@@ -1,12 +1,16 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { HotelsService } from '../hotels/hotels.service';
 import { HotelRoomsService } from '../hotel-rooms/hotel-rooms.service';
-
+import { ID } from '../../common/types';
+import { UsersService } from '../users/users.service';
 
 @Controller('admin')
 export class AdminController {
-  constructor(private readonly hotelsService: HotelsService,
-              private readonly hotelRoomsService: HotelRoomsService) {}
+  constructor(
+    private readonly hotelsService: HotelsService,
+    private readonly hotelRoomsService: HotelRoomsService,
+    private readonly usersService: UsersService
+  ) {}
 
   @Get('hotels')
   getHotels(@Query() params) {
@@ -16,14 +20,33 @@ export class AdminController {
   createHotel(@Body() data) {
     return this.hotelsService.create(data);
   }
+
+  @Put('hotels/:id')
+  updateHotel(@Param('id') id: ID, @Body() data) {
+    return this.hotelsService.update(id, data);
+  }
+
   @Get('hotel-rooms')
   getHotelRooms(@Query() data) {
-    console.log("1123",data);
     return this.hotelRoomsService.search(data);
   }
   @Post('hotel-rooms')
   createHotelRoom(@Body() data) {
     return this.hotelRoomsService.create(data);
   }
-}
 
+  @Put('hotel-rooms/:id')
+  updateHotelRoom(@Param('id') id: ID, @Body() data) {
+    return this.hotelRoomsService.update(id, data);
+  }
+
+  @Get('users')
+  getUsers(@Query() data) {
+    return this.usersService.findAll(data);
+  }
+
+  @Post('users')
+  createUser(@Body() data) {
+    return this.usersService.create(data);
+  }
+}

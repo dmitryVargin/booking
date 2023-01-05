@@ -6,7 +6,7 @@ import { HotelRoom } from '../../hotel-rooms/schemas/hotel-room.schema';
 
 export type ReservationDocument = Hotel & Document;
 
-@Schema({timestamps: true})
+@Schema({ timestamps: true })
 export class Reservation {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   userId: User;
@@ -14,10 +14,10 @@ export class Reservation {
   hotelId: Hotel;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'HotelRoom' })
   roomId: HotelRoom;
-  @Prop({required:true})
+  @Prop({ required: true })
   dateStart: Date;
-  @Prop({required:true})
-  dateEnd: Date
+  @Prop({ required: true })
+  dateEnd: Date;
 }
 
 export const ReservationSchema = SchemaFactory.createForClass(Reservation);

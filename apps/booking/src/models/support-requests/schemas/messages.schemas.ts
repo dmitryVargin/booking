@@ -9,14 +9,12 @@ export type MessageDocument = Hotel & Document;
 export class Message {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   author: User;
-  @Prop({required: true})
+  @Prop({ required: true })
   sentAt: Date;
-  @Prop({required: true})
+  @Prop({ required: true })
   text: string;
   @Prop()
-  readAt: Date
+  readAt: Date;
 }
 
 export const MessageSchema = SchemaFactory.createForClass(Message);
-
-

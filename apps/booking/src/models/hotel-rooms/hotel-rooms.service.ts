@@ -1,35 +1,43 @@
 import { Injectable } from '@nestjs/common';
 import { HotelRoomService, SearchRoomsParams } from './hotel-rooms.interface';
-import { HotelRoom, HotelRoomDocument } from './schemas/hotel-room.schema';
+import { HotelRoom } from './schemas/hotel-room.schema';
 import { ID } from '../../common/types';
-import { Connection, Model } from 'mongoose';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-
-
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
-export class HotelRoomsService implements HotelRoomService{
+export class HotelRoomsService implements HotelRoomService {
   constructor(
-    @InjectModel(HotelRoom.name) private HotelRoomModel: Model<HotelRoomDocument>,
+    @InjectModel(HotelRoom.name)
+    private HotelRoomModel: Model<HotelRoom>
   ) {}
 
- async create(data: Partial<HotelRoom>): Promise<HotelRoom> {
-   const hotelRoom = new this.HotelRoomModel(data)
-   return hotelRoom.save()
+  async create(data: Partial<HotelRoom>): Promise<HotelRoom> {
+    const hotelRoom = new this.HotelRoomModel(data);
+    return hotelRoom.save();
   }
 
-  findById(id: ID): Promise<HotelRoom> {
-    return Promise.resolve(undefined);
+  async findById(id: ID): Promise<HotelRoom> {
+    return this.HotelRoomModel.findById(id).select('-__v');
   }
 
-  async search({limit = 0, offset = 0, hotel,isEnabled}: SearchRoomsParams): Promise<HotelRoom[]> {
-    return await this.HotelRoomModel.find({
+  search({
+    limit,
+    offset,
+    hotel,
+    isEnabled,
+  }: SearchRoomsParams): Promise<HotelRoom[]> {
+    return this.HotelRoomModel.find({
       hotel,
       ...(isEnabled && { isEnabled }),
-    }).skip(offset).limit(limit).exec()
+    })
+      .skip(offset)
+      .limit(limit)
+      .select('-__v')
+      .exec();
   }
 
-  update(id: ID, data: Partial<HotelRoom>): Promise<HotelRoom> {
-    return Promise.resolve(undefined);
+  async update(id: ID, data: Partial<HotelRoom>): Promise<HotelRoom> {
+    return this.HotelRoomModel.findOneAndUpdate({ _id: id }, data);
   }
 }

@@ -25,4 +25,3 @@ const options = {
   ],
 })
 export class AppModule {}
-

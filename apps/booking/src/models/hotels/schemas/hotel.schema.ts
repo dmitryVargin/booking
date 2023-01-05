@@ -3,10 +3,9 @@ import mongoose, { Document } from 'mongoose';
 
 export type HotelDocument = Hotel & Document;
 
-
-@Schema({timestamps: true})
+@Schema({ timestamps: true })
 export class Hotel {
-  @Prop({ type: String, required: true, index: true})
+  @Prop({ type: String, required: true, index: true })
   title: string;
   @Prop()
   description: string;

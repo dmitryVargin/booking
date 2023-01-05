@@ -1,7 +1,6 @@
 import { ID } from '../../common/types';
 import { User } from './schemas/user.schema';
 
-
 export interface SearchUserParams {
   limit: number;
   offset: number;
@@ -15,4 +14,3 @@ export interface IUserService {
   findByEmail(email: string): Promise<User>;
   findAll(params: SearchUserParams): Promise<User[]>;
 }
-

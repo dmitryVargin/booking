@@ -18,4 +18,3 @@ export interface IHotelService {
   search(params: SearchHotelParams): Promise<Hotel[]>;
   update(id: ID, data: UpdateHotelParams): Promise<Hotel>;
 }
-
