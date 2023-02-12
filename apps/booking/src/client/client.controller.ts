@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { HotelsService } from '../hotels/hotels.service';
 import { HotelRoomsService } from '../hotel-rooms/hotel-rooms.service';
 import { UsersService } from '../users/users.service';
@@ -14,9 +23,22 @@ export class ClientController {
     private readonly usersService: UsersService
   ) {}
   // TODO
-  // POST /api/client/reservations
-  // GET /api/client/reservations
-  // DELETE /api/client/reservations/:id
+
+  @Post('reservations')
+  addReservation(@Body() data) {
+    return this.reservationsService.addReservation(data);
+  }
+
+  @Get('reservations')
+  getReservations(@Query() params) {
+    return this.reservationsService.getReservations(params);
+  }
+
+  @Delete('reservations/:id')
+  removeReservation(@Param('id') id: ID) {
+    return this.reservationsService.removeReservation(id);
+  }
+
   // POST /api/client/register
   // POST /api/client/support-requests/
   // GET /api/client/support-requests/

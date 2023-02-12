@@ -33,6 +33,7 @@ export class AuthController {
   //   "_id": "63e91b90d7335ef788bf8b74",
   //   "__v": 0
   // }
+
   @Post('register')
   async register(@Body() data) {
     const oldUser = await this.userService.findByEmail(data.email);
@@ -41,6 +42,15 @@ export class AuthController {
     }
     return this.userService.create(data);
   }
+  @Post('logout')
+  async logout(@Body() data) {
+    const oldUser = await this.userService.findByEmail(data.email);
+    if (oldUser) {
+      throw new BadRequestException('Такой пользователь уже зарегистрирован');
+    }
+    return this.userService.create(data);
+  }
+
   // POST /api/auth/logout
   // POST /api/client/register
 }

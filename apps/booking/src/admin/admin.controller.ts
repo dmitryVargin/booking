@@ -27,6 +27,7 @@ export class AdminController {
   getHotels(@Query() params) {
     return this.hotelsService.search(params);
   }
+
   @Post('hotels')
   createHotel(@Body() data) {
     return this.hotelsService.create(data);
@@ -37,10 +38,6 @@ export class AdminController {
     return this.hotelsService.update(id, data);
   }
 
-  @Get('hotel-rooms')
-  getHotelRooms(@Query() data) {
-    return this.hotelRoomsService.search(data);
-  }
   @Post('hotel-rooms')
   createHotelRoom(@Body() data) {
     return this.hotelRoomsService.create(data);

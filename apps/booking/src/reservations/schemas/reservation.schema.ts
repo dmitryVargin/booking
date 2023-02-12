@@ -4,7 +4,7 @@ import { Hotel } from '../../hotels/schemas/hotel.schema';
 import { User } from '../../users/schemas/user.schema';
 import { HotelRoom } from '../../hotel-rooms/schemas/hotel-room.schema';
 
-export type ReservationDocument = Hotel & Document;
+export type ReservationDocument = Reservation & Document;
 
 @Schema({ timestamps: true })
 export class Reservation {
