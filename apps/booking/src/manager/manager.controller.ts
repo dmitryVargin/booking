@@ -34,4 +34,9 @@ export class ManagerController {
   getUsers(@Query() data) {
     return this.usersService.findAll(data);
   }
+
+  @Get('support-request')
+  getSupportRequest(@Query() data) {
+    return this.supportRequestsService.findSupportRequests(data);
+  }
 }

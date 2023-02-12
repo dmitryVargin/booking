@@ -14,15 +14,16 @@ import { UsersService } from '../users/users.service';
 import { ReservationsService } from '../reservations/reservations.service';
 import { SupportRequestsService } from '../support-requests/support-requests.service';
 import { ID } from '../utils/types';
+import { SupportRequestsClientService } from '../support-requests/support-request-client.service';
 
 @Controller('client')
 export class ClientController {
   constructor(
     private readonly reservationsService: ReservationsService,
+    private readonly supportRequestsClientService: SupportRequestsClientService,
     private readonly supportRequestsService: SupportRequestsService,
     private readonly usersService: UsersService
   ) {}
-  // TODO
 
   @Post('reservations')
   addReservation(@Body() data) {
@@ -38,22 +39,12 @@ export class ClientController {
   removeReservation(@Param('id') id: ID) {
     return this.reservationsService.removeReservation(id);
   }
-
-  // POST /api/client/register
-  // POST /api/client/support-requests/
-  // GET /api/client/support-requests/
-
-  // @Get('hotels')
-  // getHotels(@Query() params) {
-  //   return this.hotelsService.search(params);
-  // }
-  // @Post('hotels')
-  // createHotel(@Body() data) {
-  //   return this.hotelsService.create(data);
-  // }
-  //
-  // @Put('hotels/:id')
-  // updateHotel(@Param('id') id: ID, @Body() data) {
-  //   return this.hotelsService.update(id, data);
-  // }
+  @Post('support-request')
+  createSupportReuest(@Body() data) {
+    return this.supportRequestsClientService.createSupportRequest(data);
+  }
+  @Get('support-request')
+  getSupportRequest(@Query() data) {
+    return this.supportRequestsService.findSupportRequests(data);
+  }
 }
